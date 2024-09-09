@@ -17,14 +17,14 @@ namespace Arkanoid.Game
 
         private void MoveWithMouse()
         {
-            Vector3 mousePosition = Input.mousePosition; // Get the mouse position in pixels
-            mousePosition.z = Camera.main.nearClipPlane; // Set the z coordinate to the near clipping plane of the camera
-            
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition.z =
+                Camera.main.nearClipPlane;
+
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
             Vector3 currentPosition = transform.position;
-            currentPosition.x = worldPosition.x; // Update x position only
-            transform.position = currentPosition; // Set the new position of the platform
-            //transform.position = new Vector3(worldPosition.x, transform.position.y, transform.position.z);
+            currentPosition.x = worldPosition.x;
+            transform.position = currentPosition;
         }
 
         #endregion

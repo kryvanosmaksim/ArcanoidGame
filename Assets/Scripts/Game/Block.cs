@@ -1,35 +1,66 @@
-using System;
 using UnityEngine;
 
 namespace Arkanoid.Game
 {
     public class Block : MonoBehaviour
     {
-        [SerializeField] private Color _color;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
+        #region Variables
 
-        private bool _isHit;
-        
-        private void OnCollisionEnter2D(Collision2D other)
+        [SerializeField] private GameObject[] _damageStates;
+        [SerializeField] private int _lives = 1;
+        [SerializeField] private int _points = 100;
+
+        private int _maxLives;
+
+        #endregion
+
+        #region Unity lifecycle
+
+        private void Start()
         {
-            if (!_isHit)
-            {
-                _isHit = true;
-                _spriteRenderer.color = _color;
-                return;
-            }
-            Debug.Log($"OnCollisionEnter2D");
-            Destroy(gameObject);
+            _maxLives = _lives;
+            UpdateDamageState();
         }
-        
-        // private void OnCollisionStay2D(Collision2D other) //inside collision
-        // {
-        //     Debug.Log($"OnCollisionStay2D");
-        // }
-        // private void OnCollisionExit2D(Collision2D other) //inside collision
-        // {
-        //     Debug.Log($"OnCollisionExit2D");
-        // }
-        
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            HandleHit();
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void HandleHit()
+        {
+            _lives--;
+            UpdateDamageState();
+            if (_lives <= 0)
+            {
+                GameManager.Instance.AddScore(_points);
+                Destroy(gameObject);
+            }
+        }
+
+        private void UpdateDamageState()
+        {
+            int stateIndex = Mathf.Clamp(_maxLives - _lives, 0, _damageStates.Length - 1);
+
+            foreach (GameObject state in _damageStates)
+            {
+                state.SetActive(false);
+            }
+
+            if (_damageStates.Length > stateIndex)
+            {
+                _damageStates[stateIndex].SetActive(true);
+            }
+            else
+            {
+                Debug.LogError("Damage state index out of range.");
+            }
+        }
+
+        #endregion
     }
 }
