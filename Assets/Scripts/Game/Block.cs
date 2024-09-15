@@ -1,9 +1,14 @@
+using System;
+using Arkanoid.Services;
 using UnityEngine;
 
 namespace Arkanoid.Game
 {
     public class Block : MonoBehaviour
     {
+        public static event Action<Block> OnCreated;
+        public static event Action<Block> OnDestroyed;
+        
         #region Variables
 
         [SerializeField] private GameObject[] _damageStates;
@@ -18,8 +23,14 @@ namespace Arkanoid.Game
 
         private void Start()
         {
+            OnCreated?.Invoke(this);
             _maxLives = _lives;
             UpdateDamageState();
+        }
+
+        private void OnDestroy()
+        {
+            OnDestroyed?.Invoke(this);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -37,7 +48,7 @@ namespace Arkanoid.Game
             UpdateDamageState();
             if (_lives <= 0)
             {
-                GameManager.Instance.AddScore(_points);
+                GameService.Instance.AddScore(_points); // Updated reference
                 Destroy(gameObject);
             }
         }

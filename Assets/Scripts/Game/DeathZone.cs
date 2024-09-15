@@ -1,3 +1,4 @@
+using Arkanoid.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +16,7 @@ namespace Arkanoid.Game
             {
                 return;
             }
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneLoaderService.Instance.ReloadCurrentScene();
         }
 
         #endregion

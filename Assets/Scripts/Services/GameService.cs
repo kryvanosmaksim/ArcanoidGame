@@ -1,33 +1,33 @@
+using Arkanoid.Game;
+using Arkanoid.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Arkanoid.Game
+namespace Arkanoid.Services
 {
-    public class GameManager : MonoBehaviour
+    public class GameService : SingletonMonoBehaviour<GameService>
     {
         #region Variables
 
-        public static GameManager Instance; //разберем на лекции
         private int _score;
-
         private ScoreLabel _scoreText;
 
         #endregion
 
         #region Unity lifecycle
 
-        private void Awake()
+        protected override void Awake()
         {
-            if (Instance == null)
+            base.Awake();
+            if (Instance == this)
             {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
                 SceneManager.sceneLoaded += OnSceneLoaded;
             }
-            else
-            {
-                Destroy(gameObject);
-            }
+        }
+
+        private void Start()
+        {
+            LevelService.Instance.OnAllBlocksDestroyed += AllBlocksDestroyedCallback;
         }
 
         private void OnDestroy()
@@ -35,6 +35,11 @@ namespace Arkanoid.Game
             if (Instance == this)
             {
                 SceneManager.sceneLoaded -= OnSceneLoaded;
+            }
+
+            if (LevelService.Instance != null)
+            {
+                LevelService.Instance.OnAllBlocksDestroyed -= AllBlocksDestroyedCallback;
             }
         }
 
@@ -57,8 +62,7 @@ namespace Arkanoid.Game
             _scoreText = FindObjectOfType<ScoreLabel>();
             if (_scoreText == null)
             {
-                Debug.LogError(
-                    "ScoreText not found in the scene");
+                Debug.LogError("ScoreText not found in the scene");
             }
 
             UpdateScoreText();
@@ -82,6 +86,12 @@ namespace Arkanoid.Game
             {
                 _scoreText.SetScore(_score);
             }
+        }
+
+        private void AllBlocksDestroyedCallback()
+        {
+            Debug.LogError("Game Win!");
+            SceneLoaderService.LoadNextLevelTest();
         }
 
         #endregion
