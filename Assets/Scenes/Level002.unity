@@ -1509,6 +1509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 480208745}
   - component: {fileID: 480208746}
+  - component: {fileID: 480208747}
   m_Layer: 0
   m_Name: Bottom
   m_TagString: Untagged
@@ -1576,6 +1577,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 32, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &480208747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480208744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38bcfc8fbed5401bb2a751c3cd143f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isActive: 1
 --- !u!1001 &510034499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4402,6 +4416,7 @@ GameObject:
   - component: {fileID: 1343421282}
   - component: {fileID: 1343421284}
   - component: {fileID: 1343421283}
+  - component: {fileID: 1343421285}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -4525,6 +4540,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343421281}
   m_CullTransparentMesh: 1
+--- !u!114 &1343421285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343421281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09da129a60c64aa198e858288a045d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _label: {fileID: 1343421283}
 --- !u!1001 &1406357721
 PrefabInstance:
   m_ObjectHideFlags: 0

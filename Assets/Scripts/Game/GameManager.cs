@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,14 +7,10 @@ namespace Arkanoid.Game
     {
         #region Variables
 
-        public static GameManager Instance;
+        public static GameManager Instance; //разберем на лекции
         private int _score;
 
-        #endregion
-
-        #region Properties
-
-        private TMP_Text ScoreText { get; set; }
+        private ScoreLabel _scoreText;
 
         #endregion
 
@@ -59,8 +54,8 @@ namespace Arkanoid.Game
 
         private void LinkScoreText()
         {
-            ScoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
-            if (ScoreText == null)
+            _scoreText = FindObjectOfType<ScoreLabel>();
+            if (_scoreText == null)
             {
                 Debug.LogError(
                     "ScoreText not found in the scene");
@@ -83,9 +78,9 @@ namespace Arkanoid.Game
 
         private void UpdateScoreText()
         {
-            if (ScoreText != null)
+            if (_scoreText != null)
             {
-                ScoreText.text = "Score: " + _score;
+                _scoreText.SetScore(_score);
             }
         }
 

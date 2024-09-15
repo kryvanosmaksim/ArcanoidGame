@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Arkanoid.Game
 {
@@ -9,7 +8,6 @@ namespace Arkanoid.Game
 
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private float _speed = 10f;
-        [SerializeField] private Collider2D _bottomWallCollider;
 
         private bool _isStarted;
         private Platform _platform;
@@ -37,14 +35,6 @@ namespace Arkanoid.Game
             if (Input.GetMouseButtonDown(0))
             {
                 StartFlying();
-            }
-        }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.collider == _bottomWallCollider)
-            {
-                ReloadLevel();
             }
         }
 
@@ -77,11 +67,6 @@ namespace Arkanoid.Game
             Vector3 currentPosition = transform.position;
             currentPosition.x = _platform.transform.position.x;
             transform.position = currentPosition;
-        }
-
-        private void ReloadLevel()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         private void StartFlying()
