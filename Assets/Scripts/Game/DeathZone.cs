@@ -10,7 +10,9 @@ namespace Arkanoid.Game
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (!_isActive) return;
-            SceneLoaderService.Instance.ReloadCurrentScene();
+
+            Debug.Log("Ball entered the death zone.");
+            LivesService.Instance.LoseLife();
         }
     }
 }
