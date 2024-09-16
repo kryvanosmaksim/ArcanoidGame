@@ -1,3 +1,4 @@
+using Arkanoid.Services;
 using UnityEngine;
 
 namespace Arkanoid.Game
@@ -8,7 +9,10 @@ namespace Arkanoid.Game
 
         private void Update()
         {
-            MoveWithMouse();
+            if (!PauseService.Instance.IsPaused)
+            {
+                MoveWithMouse();
+            }
         }
 
         #endregion
@@ -18,8 +22,7 @@ namespace Arkanoid.Game
         private void MoveWithMouse()
         {
             Vector3 mousePosition = Input.mousePosition;
-            mousePosition.z =
-                Camera.main.nearClipPlane;
+            mousePosition.z = Camera.main.nearClipPlane;
 
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
             Vector3 currentPosition = transform.position;

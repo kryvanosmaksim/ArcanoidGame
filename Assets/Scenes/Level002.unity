@@ -941,6 +941,10 @@ PrefabInstance:
       propertyPath: _spriteRenderer
       value: 
       objectReference: {fileID: 892104575}
+    - target: {fileID: 8535427836983844790, guid: 89c076d50e4a3410fb852f14c1717d7b, type: 3}
+      propertyPath: _isIndestructible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8554339814871127893, guid: 89c076d50e4a3410fb852f14c1717d7b, type: 3}
       propertyPath: m_Name
       value: CircleMetalBlock (2)
@@ -1616,6 +1620,10 @@ PrefabInstance:
       propertyPath: _spriteRenderer
       value: 
       objectReference: {fileID: 892104575}
+    - target: {fileID: 8535427836983844790, guid: 89c076d50e4a3410fb852f14c1717d7b, type: 3}
+      propertyPath: _isIndestructible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8554339814871127893, guid: 89c076d50e4a3410fb852f14c1717d7b, type: 3}
       propertyPath: m_Name
       value: CircleMetalBlock (1)
@@ -2202,6 +2210,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1343421282}
+  - {fileID: 1022751457}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2474,6 +2483,10 @@ PrefabInstance:
       propertyPath: _spriteRenderer
       value: 
       objectReference: {fileID: 892104575}
+    - target: {fileID: 8535427836983844790, guid: 89c076d50e4a3410fb852f14c1717d7b, type: 3}
+      propertyPath: _isIndestructible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8554339814871127893, guid: 89c076d50e4a3410fb852f14c1717d7b, type: 3}
       propertyPath: m_Name
       value: CircleMetalBlock (3)
@@ -3223,6 +3236,82 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1004527510324819277, guid: 6e68598d68442497ea092d38c6611994, type: 3}
   m_PrefabInstance: {fileID: 999601634}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1022751456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1022751457}
+  - component: {fileID: 1022751459}
+  - component: {fileID: 1022751458}
+  m_Layer: 5
+  m_Name: PauseScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1022751457
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022751456}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1221610759}
+  m_Father: {fileID: 602266888}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1022751458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022751456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7490196}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1022751459
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022751456}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1024855947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3855,6 +3944,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1004527510324819277, guid: 6e68598d68442497ea092d38c6611994, type: 3}
   m_PrefabInstance: {fileID: 1174085898}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1221610758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1221610759}
+  - component: {fileID: 1221610761}
+  - component: {fileID: 1221610760}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1221610759
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221610758}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1022751457}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 400, y: 400}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1221610760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221610758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7490196}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 957b58ba8e66e46cfa2d9a8aebdd4d10, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1221610761
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221610758}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1247702265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5814,6 +5978,10 @@ PrefabInstance:
       propertyPath: _spriteRenderer
       value: 
       objectReference: {fileID: 892104575}
+    - target: {fileID: 8576648493424793814, guid: ecde39ace38ab44b08f4edb103a2d561, type: 3}
+      propertyPath: _isInitiallyInvisible
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6400,6 +6568,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Services
       objectReference: {fileID: 0}
+    - target: {fileID: 5702350009189693223, guid: c5eb0b3d0f70742e7b632b61feb36266, type: 3}
+      propertyPath: _pausePanel
+      value: 
+      objectReference: {fileID: 1022751456}
     - target: {fileID: 7431576377734417146, guid: c5eb0b3d0f70742e7b632b61feb36266, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6594,6 +6766,10 @@ PrefabInstance:
       propertyPath: _spriteRenderer
       value: 
       objectReference: {fileID: 892104575}
+    - target: {fileID: 8576648493424793814, guid: ecde39ace38ab44b08f4edb103a2d561, type: 3}
+      propertyPath: _isInitiallyInvisible
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6734,6 +6910,10 @@ PrefabInstance:
       propertyPath: _spriteRenderer
       value: 
       objectReference: {fileID: 892104575}
+    - target: {fileID: 8535427836983844790, guid: 89c076d50e4a3410fb852f14c1717d7b, type: 3}
+      propertyPath: _isIndestructible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8554339814871127893, guid: 89c076d50e4a3410fb852f14c1717d7b, type: 3}
       propertyPath: m_Name
       value: CircleMetalBlock

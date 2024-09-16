@@ -8,7 +8,7 @@ namespace Arkanoid.Services
     public class GameService : SingletonMonoBehaviour<GameService>
     {
         #region Variables
-
+        
         private int _score;
         private ScoreLabel _scoreText;
 
@@ -19,23 +19,20 @@ namespace Arkanoid.Services
         protected override void Awake()
         {
             base.Awake();
-            if (Instance == this)
-            {
-                SceneManager.sceneLoaded += OnSceneLoaded;
-            }
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         private void Start()
         {
-            LevelService.Instance.OnAllBlocksDestroyed += AllBlocksDestroyedCallback;
+            if (LevelService.Instance != null)
+            {
+                LevelService.Instance.OnAllBlocksDestroyed += AllBlocksDestroyedCallback;
+            }
         }
 
         private void OnDestroy()
         {
-            if (Instance == this)
-            {
-                SceneManager.sceneLoaded -= OnSceneLoaded;
-            }
+            SceneManager.sceneLoaded -= OnSceneLoaded;
 
             if (LevelService.Instance != null)
             {
@@ -57,6 +54,12 @@ namespace Arkanoid.Services
 
         #region Private methods
 
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            LinkScoreText();
+            ResetScore();
+        }
+
         private void LinkScoreText()
         {
             _scoreText = FindObjectOfType<ScoreLabel>();
@@ -64,14 +67,10 @@ namespace Arkanoid.Services
             {
                 Debug.LogError("ScoreText not found in the scene");
             }
-
-            UpdateScoreText();
-        }
-
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            LinkScoreText();
-            ResetScore();
+            else
+            {
+                UpdateScoreText();
+            }
         }
 
         private void ResetScore()
@@ -82,16 +81,12 @@ namespace Arkanoid.Services
 
         private void UpdateScoreText()
         {
-            if (_scoreText != null)
-            {
-                _scoreText.SetScore(_score);
-            }
+            _scoreText?.SetScore(_score);
         }
 
         private void AllBlocksDestroyedCallback()
         {
             Debug.LogError("Game Win!");
-            SceneLoaderService.LoadNextLevelTest();
         }
 
         #endregion

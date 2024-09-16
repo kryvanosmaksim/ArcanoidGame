@@ -2,21 +2,25 @@ using UnityEngine;
 
 namespace Arkanoid.Utility
 {
-    public class SingletonMonoBehaviour<T> : MonoBehaviour
+    public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
         public static T Instance { get; private set; }
+        private static object _lock = new object();
 
         protected virtual void Awake()
         {
-            if (Instance != null)
+            lock (_lock)
             {
-                Destroy(gameObject);
-                return;
-            }
+                if (Instance != null && Instance != this as T)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
 
-            transform.SetParent(null);
-            DontDestroyOnLoad(gameObject);
-            Instance = gameObject.GetComponent<T>();
+                Instance = this as T;
+                DontDestroyOnLoad(gameObject);
+                transform.SetParent(null);
+            }
         }
     }
 }

@@ -7,11 +7,11 @@ namespace Arkanoid.Services
     {
         #region Public methods
 
-        public static void LoadNextLevelTest()
-        {
-            //todo: Remove it!
-            SceneManager.LoadScene("Level002");
-        }
+        // public static void LoadNextLevelTest()
+        // {
+        //     //todo: Remove it!
+        //     SceneManager.LoadScene("Level002");
+        // }
 
         public void ReloadCurrentScene()
         {

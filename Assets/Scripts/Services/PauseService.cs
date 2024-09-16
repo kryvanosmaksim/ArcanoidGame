@@ -1,12 +1,27 @@
-using System;
 using Arkanoid.Utility;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Arkanoid.Services
 {
     public class PauseService : SingletonMonoBehaviour<PauseService>
     {
-        private bool _isPaused;
+        public bool IsPaused { get; private set; }
+        [SerializeField] private GameObject _pausePanel;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            if (_pausePanel != null)
+            {
+                _pausePanel.SetActive(false); // Initialize with the panel hidden
+            }
+            else
+            {
+                Debug.LogError("PausePanel not assigned in the inspector.");
+            }
+        }
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -17,8 +32,13 @@ namespace Arkanoid.Services
 
         private void TogglePause()
         {
-            _isPaused = !_isPaused;
-            Time.timeScale = _isPaused ? 0 : 1; // тернарная операция
+            IsPaused = !IsPaused;
+            Time.timeScale = IsPaused ? 0 : 1;
+
+            if (_pausePanel)
+            {
+                _pausePanel.SetActive(IsPaused);
+            }
         }
     }
 }

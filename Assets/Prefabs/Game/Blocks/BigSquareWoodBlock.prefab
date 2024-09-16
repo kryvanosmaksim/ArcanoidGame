@@ -183,6 +183,8 @@ MonoBehaviour:
   - {fileID: 2988385682971551673}
   _lives: 2
   _points: 10
+  _isIndestructible: 0
+  _isInitiallyInvisible: 0
 --- !u!1 &5708590318247561226
 GameObject:
   m_ObjectHideFlags: 0
