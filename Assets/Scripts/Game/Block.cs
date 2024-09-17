@@ -6,19 +6,23 @@ namespace Arkanoid.Game
 {
     public class Block : MonoBehaviour
     {
-        public static event Action<Block> OnCreated;
-        public static event Action<Block> OnDestroyed;
-        
         #region Variables
-        
+
         [SerializeField] private GameObject[] _damageStates;
         [SerializeField] private int _lives = 1;
         [SerializeField] private int _points = 100;
-        [SerializeField] private bool _isIndestructible = false; // Indestructible flag
-        [SerializeField] private bool _isInitiallyInvisible = false; // Initially invisible flag
+        [SerializeField] private bool _isIndestructible;
+        [SerializeField] private bool _isInitiallyInvisible;
+        private bool _hasBeenHit;
 
         private int _maxLives;
-        private bool _hasBeenHit = false;
+
+        #endregion
+
+        #region Events
+
+        public static event Action<Block> OnCreated;
+        public static event Action<Block> OnDestroyed;
 
         #endregion
 
@@ -29,7 +33,6 @@ namespace Arkanoid.Game
             OnCreated?.Invoke(this);
             _maxLives = _lives;
 
-            // Set all damage states to inactive if the block is initially invisible
             if (_isInitiallyInvisible)
             {
                 SetAllDamageStatesActive(false);
@@ -57,7 +60,6 @@ namespace Arkanoid.Game
             if (_isInitiallyInvisible && !_hasBeenHit)
             {
                 _hasBeenHit = true;
-                // Reveal the block (set the first damage state active)
                 SetAllDamageStatesActive(false);
                 _damageStates[0].SetActive(true);
                 return;
@@ -69,15 +71,26 @@ namespace Arkanoid.Game
                 UpdateDamageState();
                 if (_lives <= 0)
                 {
-                    GameService.Instance.AddScore(_points); // Re-add the score increment call
+                    GameService.Instance.AddScore(_points);
                     Destroy(gameObject);
                 }
             }
         }
 
+        private void SetAllDamageStatesActive(bool isActive)
+        {
+            foreach (GameObject state in _damageStates)
+            {
+                state.SetActive(isActive);
+            }
+        }
+
         private void UpdateDamageState()
         {
-            if (_isInitiallyInvisible && !_hasBeenHit) return;
+            if (_isInitiallyInvisible && !_hasBeenHit)
+            {
+                return;
+            }
 
             int stateIndex = Mathf.Clamp(_maxLives - _lives, 0, _damageStates.Length - 1);
 
@@ -89,18 +102,6 @@ namespace Arkanoid.Game
             if (_damageStates.Length > stateIndex)
             {
                 _damageStates[stateIndex].SetActive(true);
-            }
-            else
-            {
-                Debug.LogError("Damage state index out of range.");
-            }
-        }
-
-        private void SetAllDamageStatesActive(bool isActive)
-        {
-            foreach (GameObject state in _damageStates)
-            {
-                state.SetActive(isActive);
             }
         }
 

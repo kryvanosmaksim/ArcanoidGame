@@ -8,7 +8,7 @@ namespace Arkanoid.Services
     public class GameService : SingletonMonoBehaviour<GameService>
     {
         #region Variables
-        
+
         private int _score;
         private ScoreLabel _scoreText;
 
@@ -54,23 +54,24 @@ namespace Arkanoid.Services
 
         #region Private methods
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        private void AllBlocksDestroyedCallback()
         {
-            LinkScoreText();
-            ResetScore();
+            Debug.LogError("Game Win!");
         }
 
         private void LinkScoreText()
         {
             _scoreText = FindObjectOfType<ScoreLabel>();
-            if (_scoreText == null)
-            {
-                Debug.LogError("ScoreText not found in the scene");
-            }
-            else
+            if (_scoreText != null)
             {
                 UpdateScoreText();
             }
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            LinkScoreText();
+            ResetScore();
         }
 
         private void ResetScore()
@@ -82,11 +83,6 @@ namespace Arkanoid.Services
         private void UpdateScoreText()
         {
             _scoreText?.SetScore(_score);
-        }
-
-        private void AllBlocksDestroyedCallback()
-        {
-            Debug.LogError("Game Win!");
         }
 
         #endregion

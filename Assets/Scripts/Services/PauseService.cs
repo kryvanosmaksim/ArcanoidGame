@@ -1,6 +1,5 @@
 using Arkanoid.Utility;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Arkanoid.Services
 {
@@ -14,11 +13,7 @@ namespace Arkanoid.Services
             base.Awake();
             if (_pausePanel != null)
             {
-                _pausePanel.SetActive(false); // Initialize with the panel hidden
-            }
-            else
-            {
-                Debug.LogError("PausePanel not assigned in the inspector.");
+                _pausePanel.SetActive(false); 
             }
         }
 

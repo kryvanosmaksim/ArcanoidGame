@@ -21,15 +21,15 @@ namespace Arkanoid.Services
         #endregion
 
         #region Unity lifecycle
-        
-        protected override void Awake() //  subscribe
+
+        protected override void Awake()
         {
             base.Awake();
             Block.OnCreated += BlockCreatedCallback;
             Block.OnDestroyed += BlockDestroyedCallback;
         }
 
-        private void OnDestroy() // unsubscribe
+        private void OnDestroy()
         {
             Block.OnCreated -= BlockCreatedCallback;
             Block.OnDestroyed -= BlockDestroyedCallback;

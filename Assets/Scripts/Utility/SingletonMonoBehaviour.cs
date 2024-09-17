@@ -4,8 +4,19 @@ namespace Arkanoid.Utility
 {
     public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
+        #region Variables
+
+        private static readonly object _lock = new();
+
+        #endregion
+
+        #region Properties
+
         public static T Instance { get; private set; }
-        private static readonly object _lock = new object();
+
+        #endregion
+
+        #region Unity lifecycle
 
         protected virtual void Awake()
         {
@@ -13,7 +24,6 @@ namespace Arkanoid.Utility
             {
                 if (Instance != null && Instance != this as T)
                 {
-                    Debug.LogWarning($"Another instance of {typeof(T)} exists. Destroying this instance.");
                     Destroy(gameObject);
                     return;
                 }
@@ -23,5 +33,7 @@ namespace Arkanoid.Utility
                 transform.SetParent(null);
             }
         }
+
+        #endregion
     }
 }

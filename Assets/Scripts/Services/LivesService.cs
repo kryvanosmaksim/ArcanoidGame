@@ -1,19 +1,24 @@
+using System.Collections;
+using Arkanoid.Game;
 using Arkanoid.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using Arkanoid.Game;
-using UnityEngine.Serialization;
 
 namespace Arkanoid.Services
 {
     public class LivesService : SingletonMonoBehaviour<LivesService>
     {
-        [SerializeField] private GameObject[] _lifeSprites; // Assign your life sprites in the inspector
+        #region Variables
+
+        [SerializeField] private GameObject[] _lifeSprites;
         [SerializeField] private int _maxLives = 3;
-        
-        private int _currentLives;
         private Ball _ball;
+
+        private int _currentLives;
+
+        #endregion
+
+        #region Unity lifecycle
 
         protected override void Awake()
         {
@@ -21,12 +26,19 @@ namespace Arkanoid.Services
             InitLives();
         }
 
-        private void InitLives()
+        private void OnEnable()
         {
-            _currentLives = _maxLives;
-            UpdateLivesDisplay();
-            _ball = FindObjectOfType<Ball>();
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        #endregion
+
+        #region Public methods
 
         public void LoseLife()
         {
@@ -46,19 +58,25 @@ namespace Arkanoid.Services
             }
         }
 
-        private void UpdateLivesDisplay()
+        #endregion
+
+        #region Private methods
+
+        private void InitLives()
         {
-            for (int i = 0; i < _lifeSprites.Length; i++)
-            {
-                if (i < _currentLives)
-                {
-                    _lifeSprites[i].SetActive(true);
-                }
-                else
-                {
-                    _lifeSprites[i].SetActive(false);
-                }
-            }
+            _currentLives = _maxLives;
+            UpdateLivesDisplay();
+            _ball = FindObjectOfType<Ball>();
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            InitLives();
+        }
+
+        private void ReloadLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         private void ResetBall()
@@ -72,24 +90,14 @@ namespace Arkanoid.Services
             yield return new WaitForSeconds(0.5f);
         }
 
-        private void ReloadLevel()
+        private void UpdateLivesDisplay()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            for (int i = 0; i < _lifeSprites.Length; i++)
+            {
+                _lifeSprites[i].SetActive(i < _currentLives);
+            }
         }
 
-        private void OnEnable()
-        {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-
-        private void OnDisable()
-        {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
-
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            InitLives();
-        }
+        #endregion
     }
 }
